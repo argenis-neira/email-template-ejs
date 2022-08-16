@@ -1,5 +1,8 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
+var morgan = require('morgan');
+
 
 const port = 3000;
 
@@ -31,12 +34,15 @@ const oData = {
         "December"]
 };
 
+app.use(morgan('dev'))
+app.use(cors())
+
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views')
 
 app.use(express.static(__dirname + "/public"));
 
-app.get('/', (req, res) => {
+app.get('/home', (req, res) => {
     res.render("index", oData);
 });
 
